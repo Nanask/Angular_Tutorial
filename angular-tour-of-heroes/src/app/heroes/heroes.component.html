@@ -1,7 +1,32 @@
-<!-- <h1>{{ hero.name | uppercase }} Details</h1>
-<div><span>id : </span>{{ hero.id }}</div>
-<div><span>name : </span>{{ hero.name }}</div> -->
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <!-- 배열을 나열하기 -->
+  <li *ngFor="let hero of heroes"
+    [class.selected]="hero === selectedHero"
+    (click)="onSelect(hero)">
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+
+<!-- 위와 같은 오류가 발생하지 않기 위해 *ngIF를 사용해서 클릭된 값이 없으면 DOM에서 DIV를 삭제한다. -->
+<!-- <div *ngIf="selectedHero"> -->
+<!-- 함수를 만들고 처음 실행할 때 name오류가 발생한다 -->
+<!-- 그 이유는 처음에는 아무것도 선택하지 않아 빈값이기 때문 -->
+<!-- <h2>{{selectedHero.name | uppercase}} Details</h2>
+<div><span>id: </span>{{selectedHero.id}}</div>
 <div>
-  <label for="name">Hero name: </label>
-  <input id="name" [(ngModel)]="hero.name" placeholder="name" />
+  <label for="hero-name">Hero name: </label>
+  <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+</div>
+</div> -->
+
+<!-- css클래스 토글을 추가해서 바뀐 코드 -->
+<div *ngIf="selectedHero">
+  <h2>{{selectedHero.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{selectedHero.id}}</div>
+  <div>
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+  </div>
+
 </div>
